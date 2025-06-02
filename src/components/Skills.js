@@ -38,10 +38,10 @@ export const Skills = () => {
                         <h2>
                             Skills
                         </h2>
-                        <p>These are skills that I have attained and achieved over the course of 1 year.<br></br>With high desire in learning , more skills will be further developed or polished</p>
+                        <p>These are skills that I have attained and achieved over the course of 3 years.<br></br>With high desire in learning , more skills will be further developed or polished</p>
                         <Carousel responsive={responsive} infinite={true} className="skill-slider">
                         <div className="item">
-                            <img src={pg1} alt="Image"></img>
+                            <img src={pg2} alt="Image"></img>
                             <h5>Web Developement</h5>
                         </div>
                         <div className="item">
@@ -49,7 +49,7 @@ export const Skills = () => {
                             <h5>App Developement</h5>
                         </div>
                         <div className="item">
-                            <img src={pg3} alt="Image"></img>
+                            <img src={pg1} alt="Image"></img>
                             <h5>Certified Cloud Engineer</h5>
                         </div>
                         <div className="item">
@@ -57,8 +57,16 @@ export const Skills = () => {
                             <h5>UI/UX Designer</h5>
                         </div>
                         <div className="item">
-                            <img src={pg4} alt="Image"></img>
+                            <img src={pg1} alt="Image"></img>
                             <h5>3D Modelling</h5>
+                        </div>
+                        <div className="item">
+                            <img src={pg3} alt="Image"></img>
+                            <h5>Game Design</h5>
+                        </div>
+                        <div className="item">
+                            <img src={pg3} alt="Image"></img>
+                            <h5>Game Development</h5>
                         </div>
                         </Carousel>
                     </div>

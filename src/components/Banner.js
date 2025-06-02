@@ -48,8 +48,8 @@ export const Banner = () => {
                 <Col xs={12} md={8} xl={6}>
                     <span className="tagline">Welcome to my Portfolio</span>
                     <h1>{'Hi I am Ivy Chung - '}<span className="wrap">{text}</span></h1>
-                    <p>I am a Year 2 student specialising in Artificial Intelligence and minoring in Game Design currently studying in the School of Computer Science at Taylor's University . I have a strong passion in software development in particular application development and the eagerness in developing new skills in programming as well as diving into the world of design in technology.  </p>
-                    <button onClick={()=> console.log('connect')}>Let's Connect <ArrowRightCircle size={25}></ArrowRightCircle> </button>
+                    <p>I am a final year student specialising in Artificial Intelligence and minoring in Game Design currently studying Computer Science at Taylor's University. I have a strong passion in software development in particular application development and the eagerness in developing new skills in programming as well as diving into the world of design in technology.  </p>
+                    <button onClick={() => window.open("https://www.linkedin.com/in/ivy-shin-3760b526a/", "_blank")}>Let's Connect <ArrowRightCircle size={25}></ArrowRightCircle> </button>
                 </Col>
                 <Col xs={12} md={7} xl={5}>
                     <img src={headerImg} alt="Header Img"></img>
