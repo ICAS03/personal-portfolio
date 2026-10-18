@@ -1,0 +1,65 @@
+.cursor-eyes-stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.cursor-eyes {
+  position: relative;
+  flex: none;
+  width: 56px;
+  height: 36px;
+}
+
+.cursor-eye {
+  position: absolute;
+  top: 0;
+  width: 24px;
+  height: 36px;
+}
+
+.cursor-eye:first-child {
+  left: 0;
+}
+
+.cursor-eye:last-child {
+  right: 0;
+}
+
+.cursor-eye-sclera {
+  position: absolute;
+  inset: 0;
+  background: rgb(255, 254, 253);
+  border-radius: 40px;
+}
+
+.cursor-eye-pupil {
+  position: absolute;
+  top: 7px;
+  right: 0;
+  bottom: 7px;
+  left: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.cursor-eye-iris {
+  width: 16px;
+  height: 22px;
+  background: rgb(12, 12, 12);
+  border-radius: 100%;
+}
+
+.cursor-eye-glint {
+  position: absolute;
+  bottom: 3px;
+  left: calc(50% - 1.5px);
+  width: 3px;
+  height: 3px;
+  background: rgb(255, 254, 253);
+  border-radius: 100%;
+}

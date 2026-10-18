@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="900" viewBox="0 0 640 900">
+  <rect width="640" height="900" fill="#111118"/>
+  <rect width="640" height="16" fill="#3b82f6"/>
+  <rect y="16" width="640" height="8" fill="#bd48ec"/>
+  <text x="56" y="160" fill="#94a3b8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="22" letter-spacing="4">LETS CONNECT</text>
+  <text x="56" y="260" fill="#f8fafc" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="36" font-weight="700">Ivy Chung</text>
+  <text x="56" y="320" fill="#cbd5e1" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="20">Finds the gap, then builds</text>
+  <text x="56" y="352" fill="#cbd5e1" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="20">the AI-powered fix.</text>
+  <rect x="56" y="420" width="528" height="1" fill="#334155"/>
+  <text x="56" y="490" fill="#bd48ec" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18">LinkedIn</text>
+  <text x="56" y="528" fill="#f8fafc" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18">ivy-shin-3760b526a</text>
+  <text x="56" y="600" fill="#bd48ec" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18">GitHub</text>
+  <text x="56" y="638" fill="#f8fafc" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18">ICAS03</text>
+  <text x="56" y="820" fill="#64748b" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="16">Drag me around</text>
+</svg>

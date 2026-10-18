@@ -1,0 +1,119 @@
+.text-arrow-cta {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 60px;
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.text-arrow-cta-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  width: max-content;
+}
+
+.text-arrow-cta-label {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.text-arrow-cta-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 15px;
+  color: inherit;
+}
+
+.text-arrow-cta-arrow.is-left {
+  position: absolute;
+  left: -20px;
+  top: 50%;
+  z-index: 1;
+  margin-top: -7.5px;
+}
+
+.text-arrow-cta-arrow.is-right {
+  position: relative;
+}
+
+.text-arrow-cta:hover .text-arrow-cta-arrow.is-left,
+.text-arrow-cta:focus-visible .text-arrow-cta-arrow.is-left {
+  position: relative;
+  left: auto;
+  top: auto;
+  margin-top: 0;
+}
+
+.text-arrow-cta:hover .text-arrow-cta-arrow.is-right,
+.text-arrow-cta:focus-visible .text-arrow-cta-arrow.is-right {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  z-index: 1;
+  margin-top: -7.5px;
+}
+
+.text-arrow-cta-underline {
+  position: absolute;
+  top: 129%;
+  left: 50%;
+  z-index: 1;
+  display: flex;
+  overflow: clip;
+  width: 100%;
+  min-height: 1px;
+  transform: translate(-50%, -50%);
+}
+
+.text-arrow-cta-line {
+  position: absolute;
+  bottom: 0;
+  height: 1px;
+  background: currentColor;
+}
+
+.text-arrow-cta-line.is-left {
+  left: -3px;
+  width: 1%;
+}
+
+.text-arrow-cta-line.is-right {
+  right: 0;
+  width: 100%;
+}
+
+@media (max-width: 767px) {
+  .text-arrow-cta {
+    margin-top: 40px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .text-arrow-cta:hover .text-arrow-cta-arrow.is-left,
+  .text-arrow-cta:focus-visible .text-arrow-cta-arrow.is-left {
+    position: absolute;
+    left: -20px;
+    top: 50%;
+    margin-top: -7.5px;
+  }
+
+  .text-arrow-cta:hover .text-arrow-cta-arrow.is-right,
+  .text-arrow-cta:focus-visible .text-arrow-cta-arrow.is-right {
+    position: relative;
+    right: auto;
+    top: auto;
+    margin-top: 0;
+  }
+
+}

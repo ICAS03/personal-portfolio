@@ -1,14 +1,28 @@
-import { Container, Row, Col, Tab, Nav, TabContainer } from "react-bootstrap";
-import { Canvas, useFrame } from "@react-three/fiber";
-import { useRef, useState } from "react";
-import { OrbitControls, Text } from "@react-three/drei";
-import { ProjectCard } from "./ProjectCard";
+import { useEffect, useState } from "react";
+import { Container, Row, Col } from "react-bootstrap";
+import { CircularCarousel } from "./CircularCarousel";
+import { OrbitProjects } from "./OrbitProjects";
+import { ConstellationGrid } from "./ConstellationGrid";
+import { ScrollText } from "./ScrollText";
+import { GithubGraph } from "./GithubGraph";
 import proimg1 from "../assets/img/proimg1.png";
 import proimg2 from "../assets/img/proimg2.jpeg";
 import proimg3 from "../assets/img/proimg3.png";
 import proimg4 from "../assets/img/proimg4.png";
-import proimg5 from "../assets/img/proimg5.jpeg";
+import proimg5 from "../assets/img/proimg5.png";
 import proimg6 from "../assets/img/proimg6.png";
+
+const GITHUB_USER = "ICAS03";
+const EXCLUDED_REPO = "personal-portfolio";
+const FEATURED_REPO_URLS = new Set(
+  [
+    "https://github.com/ICAS03/EatUp-Project",
+    "https://github.com/ICAS03/gcp-waterguard",
+    "https://github.com/ICAS03/xcesscity",
+    "https://github.com/ICAS03/eth_taipei_final",
+    "https://github.com/ICAS03/agentic-main",
+  ].map((url) => url.toLowerCase()),
+);
 
 export const Project = () => {
   const projects = [
@@ -50,102 +64,158 @@ export const Project = () => {
     },
   ];
 
-  const Sphere = ({ position, args, color }) => {
-    const ref = useRef();
+  const [showWriting, setShowWriting] = useState(false);
+  const [writingReady, setWritingReady] = useState(false);
+  const [githubProjects, setGithubProjects] = useState([]);
+  const [githubStatus, setGithubStatus] = useState("loading");
 
-    const [isHovered, setIsHovered] = useState(false);
-    const [isClicked, setIsClicked] = useState(false);
+  useEffect(() => {
+    let cancelled = false;
 
-    useFrame((state, delta) => {
-      const speed = isHovered ? 1 : 0.2;
-      ref.current.rotation.y += delta * speed;
+    const loadGithubProjects = async () => {
+      try {
+        const all = [];
+        for (let page = 1; ; page++) {
+          const response = await fetch(
+            `https://api.github.com/users/${GITHUB_USER}/repos?per_page=100&page=${page}&sort=updated`,
+          );
+          if (!response.ok) throw new Error("GitHub request failed");
+          const data = await response.json();
+          all.push(...data);
+          if (data.length < 100) break;
+        }
+        if (cancelled) return;
+        setGithubProjects(
+          all.filter(
+            (repo) =>
+              repo.name.toLowerCase() !== EXCLUDED_REPO &&
+              !FEATURED_REPO_URLS.has(repo.html_url.toLowerCase()),
+          ),
+        );
+        setGithubStatus("ready");
+      } catch {
+        if (!cancelled) setGithubStatus("error");
+      }
+    };
+
+    loadGithubProjects();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!showWriting) return undefined;
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    document.getElementById("project-writing")?.scrollIntoView({
+      behavior: reduceMotion ? "auto" : "smooth",
+      block: "start",
     });
-
-    return (
-      <>
-        <mesh
-          position={position}
-          ref={ref}
-          onPointerEnter={(event) => (
-            event.stopPropagation(), setIsHovered(true)
-          )}
-          onPointerLeave={() => setIsHovered(false)}
-          onClick={() => setIsClicked(!isClicked)}
-          scale={isClicked ? 1.5 : 1}
-        >
-          <sphereGeometry args={args} />
-          <meshStandardMaterial
-            color={isHovered ? "lightblue" : "orange"}
-            wireframe
-          />
-        </mesh>
-        <Text
-          position={[position[0], position[1] + 3, position[2]]}
-          fontSize={0.5}
-          color="white"
-        >
-          To Be Updated
-        </Text>
-      </>
-    );
-  };
+    return undefined;
+  }, [showWriting]);
 
   return (
     <section className="project" id="project">
+      <ConstellationGrid />
+      <h2 className="visually-hidden">Projects</h2>
+      <OrbitProjects
+        items={projects.map((project) => ({
+          image: project.imgUrl,
+          label: project.title,
+          description: project.description,
+          link: project.githubUrl,
+        }))}
+      />
       <Container>
         <Row>
           <Col size={12}>
-            <h2>Projects</h2>
-            <p>
-              Explore a collection of my previous projects, showcasing a diverse
-              range of innovative solutions and creative applications.
-            </p>
-            <Tab.Container id="projects-tabs" defaultActiveKey="first">
-              <Nav
-                variant="pills"
-                className="nav-pills mb-5 justify-content-center align-items-center"
-                id="pills-tab"
+            <div
+              className="project-switch"
+              role="tablist"
+              aria-label="Project section"
+            >
+              <button
+                type="button"
+                role="tab"
+                aria-selected={!showWriting}
+                className={!showWriting ? "is-active" : ""}
+                onClick={() => setShowWriting(false)}
               >
-                <Nav.Item>
-                  <Nav.Link eventKey="first">TAB 1</Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                  <Nav.Link eventKey="second">TAB 2</Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                  <Nav.Link eventKey="third">TAB 3</Nav.Link>
-                </Nav.Item>
-              </Nav>
-              <Tab.Content>
-                <Tab.Pane eventKey="first">
-                  <Row>
-                    {projects.map((project, index) => {
-                      return (
-                        <ProjectCard key={index} {...project}></ProjectCard>
-                      );
-                    })}
-                  </Row>
-                </Tab.Pane>
-                <Tab.Pane eventKey="second">
-                  <iframe
-                    src="https://ivychungaishin.blogspot.com/"
-                    style={{ width: "100%", height: "500px", border: "none" }}
-                    title="Ivy Chung's Blog"
-                  ></iframe>
-                </Tab.Pane>
-                <Tab.Pane eventKey="third">
-                  <Canvas style={{ height: "500px" }}>
-                    <ambientLight intensity={0.5} />
-                    <Sphere
-                      position={[0, 0, 0]}
-                      args={[1.5, 45, 45]}
-                      color={"orange"}
+                App/Web Developments
+              </button>
+              <button
+                type="button"
+                role="tab"
+                aria-selected={showWriting}
+                className={showWriting ? "is-active" : ""}
+                onClick={() => {
+                  setWritingReady(true);
+                  setShowWriting(true);
+                }}
+              >
+                Game Developments
+              </button>
+            </div>
+            <ScrollText
+              as="h3"
+              className="github-heading"
+              text="More on GitHub"
+            />
+            <GithubGraph username={GITHUB_USER} />
+            {githubStatus === "loading" && (
+              <p className="github-status">
+                Loading more projects from GitHub…
+              </p>
+            )}
+            {githubStatus === "error" && (
+              <p className="github-status">
+                More projects live on{" "}
+                <a
+                  href={`https://github.com/${GITHUB_USER}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  GitHub
+                </a>
+                .
+              </p>
+            )}
+            {githubStatus === "ready" && githubProjects.length > 0 && (
+              <>
+                <CircularCarousel
+                  autoPlay
+                  items={githubProjects.map((repo) => ({
+                    id: String(repo.id),
+                    title: repo.name,
+                    description: repo.description || "No description yet.",
+                    tag: repo.fork ? "Fork" : repo.language,
+                    url: repo.html_url,
+                  }))}
+                />
+              </>
+            )}
+            <div
+              id="project-writing"
+              className={`project-writing${showWriting ? " is-open" : ""}`}
+            >
+              <div className="project-writing-inner">
+                <ScrollText
+                  as="h3"
+                  className="github-heading"
+                  text="Game Development Portfolio"
+                />
+                {writingReady && (
+                  <div className="scene-blog">
+                    <iframe
+                      src="https://ivychungaishin.blogspot.com/"
+                      title="Ivy Chung's Blog"
                     />
-                    <OrbitControls enableZoom={false} />
-                  </Canvas>
-                </Tab.Pane>
-              </Tab.Content>
-            </Tab.Container>
+                  </div>
+                )}
+              </div>
+            </div>
           </Col>
         </Row>
       </Container>

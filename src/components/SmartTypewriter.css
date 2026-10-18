@@ -1,0 +1,52 @@
+.smart-type {
+  display: inline-grid;
+  vertical-align: bottom;
+}
+
+.smart-type-stack {
+  display: grid;
+}
+
+.smart-type-ghost,
+.smart-type-live {
+  grid-area: 1 / 1;
+  min-width: 0;
+}
+
+.smart-type-ghost {
+  visibility: hidden;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.smart-type-line {
+  white-space: nowrap;
+}
+
+.smart-type-trail {
+  background: linear-gradient(90deg, #dfe1eb, #6a87fc);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.smart-type-caret {
+  display: inline-block;
+  width: 0.18em;
+  height: 0.82em;
+  margin-left: 0.08em;
+  vertical-align: -0.08em;
+  background: #e1b9f3f9;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.smart-type-caret.is-on {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .smart-type-caret {
+    display: none;
+  }
+}

@@ -1,0 +1,189 @@
+.orbit-root {
+  position: relative;
+  z-index: 1;
+  overflow: clip;
+  width: 100%;
+  height: 320vh;
+}
+
+.orbit-sticky {
+  position: sticky;
+  top: 0;
+  isolation: isolate;
+  overflow: hidden;
+  contain: paint;
+  width: 100%;
+  height: 100svh;
+  min-height: 600px;
+  perspective: 1300px;
+  perspective-origin: 50% 50%;
+}
+
+.orbit-title {
+  position: absolute;
+  left: 50%;
+  z-index: 0;
+  width: max-content;
+  color: #f4f4f5;
+  font-family: inherit;
+  font-size: clamp(64px, 11vw, 144px);
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  line-height: 1.05;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.orbit-title-left {
+  top: 56%;
+}
+
+.orbit-title-right {
+  top: 39%;
+}
+
+.project .orbit-copy {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 2;
+  width: 240px;
+  max-width: 80vw;
+  margin: 0;
+  padding: 16px;
+  color: #d4d4d8;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  line-height: 1.45;
+  text-align: center;
+  pointer-events: none;
+  transform: translate3d(-50%, -50%, 0);
+}
+
+.orbit-stage {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  transform-style: preserve-3d;
+}
+
+.orbit-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  overflow: hidden;
+  color: inherit;
+  text-decoration: none;
+  transform-origin: 50% 50%;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+}
+
+.orbit-card:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 4px;
+}
+
+.orbit-card-face {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  background: #161616;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
+}
+
+.orbit-card-face::after {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 46%;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.72));
+  content: "";
+  pointer-events: none;
+}
+
+.orbit-card-face img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  user-select: none;
+}
+
+.orbit-card-label {
+  position: absolute;
+  right: 12px;
+  bottom: 10px;
+  left: 12px;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.65);
+}
+
+.orbit-card-label small {
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+.orbit-compact {
+  position: relative;
+  z-index: 1;
+  padding: 72px 24px 40px;
+}
+
+.project .orbit-compact-header h2 {
+  margin: 0;
+  color: #fff;
+  font-family: inherit;
+  font-size: clamp(40px, 10vw, 72px);
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  line-height: 1.05;
+  text-align: left;
+}
+
+.project .orbit-compact-header p {
+  max-width: 320px;
+  margin: 20px 0 0;
+  color: #b8b8b8;
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: 1.45;
+  text-align: left;
+  width: auto;
+}
+
+.orbit-compact-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 56px;
+}
+
+.orbit-compact-card {
+  display: block;
+  overflow: hidden;
+  aspect-ratio: 1.48 / 1;
+  color: inherit;
+  text-decoration: none;
+}
+
+@media (max-width: 640px) {
+  .orbit-compact-grid {
+    grid-template-columns: 1fr;
+  }
+}
